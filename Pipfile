@@ -9,6 +9,7 @@ verify_ssl = true
 django = "==2.2.5"
 pew = "==1.1.2"
 pillow = "*"
+django-countries = "*"
 
 [requires]
 python_version = "3.6"
