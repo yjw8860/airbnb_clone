@@ -7,6 +7,4 @@ class CustomUserAdmin(UserAdmin):
 
     """Custom User Admin"""
 
-    fieldsets = (
-        ("BANANA",{'fields':("avatar","gender","bio")}),
-    )
+    fieldsets = UserAdmin.fieldsets + (("Custom Profile",{'fields':("avatar","gender","bio","birthdate","language","currency","superhost")}),)
