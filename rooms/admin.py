@@ -14,6 +14,29 @@ class RoomAdmin(admin.ModelAdmin):
 
     """ Room Admin Definition"""
 
+    fieldsets = (
+        (
+            'Spaces',
+            {'fields': ('guests', 'bedrooms', 'beds')}
+        ),
+        (
+            'Basic Info',
+            {'fields':('name', 'description', 'country', 'address', 'price')}
+        ),
+        (
+            'Times',
+            {'fields':('check_in', 'check_out', 'instant_book')}
+        ),
+        (
+            'More About the Space',
+            {'fields':('amenities','facilities','house_rules',)}
+        ),
+        (
+            'Last Details',
+            {'fields':('host',)}
+        ),
+    )
+
     list_display = (
         "name",
         "country",
@@ -28,10 +51,12 @@ class RoomAdmin(admin.ModelAdmin):
         "instant_book",
     )
 
-    list_filter = ('instant_book', 'city', 'country')
+    list_filter = ('instant_book','host__superhost', "room_type", "amenities", "facilities", "house_rules", 'country', 'city')
 
     #https://docs.djangoproject.com/en/2.2/ref/contrib/admin/ 참고
     search_fields = ['=city', '^host__username']
+
+    filter_horizontal = ('amenities','facilities','house_rules',)
 
 @admin.register(models.Photo)
 class PhotoAdmin(admin.ModelAdmin):
