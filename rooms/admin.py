@@ -17,7 +17,7 @@ class RoomAdmin(admin.ModelAdmin):
     fieldsets = (
         (
             'Spaces',
-            {'fields': ('guests', 'bedrooms', 'beds')}
+            {'fields': ('guests', 'bedrooms', 'beds', 'baths')}
         ),
         (
             'Basic Info',
@@ -49,6 +49,7 @@ class RoomAdmin(admin.ModelAdmin):
         "check_in",
         "check_out",
         "instant_book",
+        "count_amenities"
     )
 
     list_filter = ('instant_book','host__superhost', "room_type", "amenities", "facilities", "house_rules", 'country', 'city')
@@ -57,6 +58,11 @@ class RoomAdmin(admin.ModelAdmin):
     search_fields = ['=city', '^host__username']
 
     filter_horizontal = ('amenities','facilities','house_rules',)
+
+    def count_amenities(self, obj):
+        print(obj.amenities.all())
+        return "potato"
+    count_amenities.short_description = 'HELLO SEXY?'
 
 @admin.register(models.Photo)
 class PhotoAdmin(admin.ModelAdmin):
