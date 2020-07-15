@@ -1,6 +1,6 @@
 from django_seed import Seed
 from django.core.management.base import BaseCommand
-from rooms.models import Room, RoomType, Photo
+from rooms.models import Room, RoomType, Photo, Amenity, Facility, HouseRule
 from users.models import User
 import random
 from django.contrib.admin.utils import flatten
@@ -18,6 +18,9 @@ class Command(BaseCommand):
         seeder = Seed.seeder()
         all_users = User.objects.all()
         room_types = RoomType.objects.all()
+        amenities = Amenity.objects.all()
+        facilities = Facility.objects.all()
+        rules = HouseRule.objects.all()
         seeder.add_entity(Room, number, {
             'name': lambda x: seeder.faker.address(),
             'host': lambda x: random.choice(all_users),
@@ -38,4 +41,16 @@ class Command(BaseCommand):
                     room=room,
                     file=f'rooms_photos/{random.randint(1,31)}.webp',
                 )
+            for a in amenities:
+                idx = random.randint(0,15)
+                if idx % 2 == 0:
+                    room.amenities.add(a)
+            for f in facilities:
+                idx = random.randint(0,15)
+                if idx % 2 == 0:
+                    room.facilities.add(f)
+            for r in rules:
+                idx = random.randint(0,15)
+                if idx % 2 == 0:
+                    room.house_rules.add(r)
         self.stdout.write(self.style.SUCCESS(f'{number} rooms are created!'))
