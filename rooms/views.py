@@ -1,11 +1,9 @@
 from django.shortcuts import render
-from datetime import datetime
-
+from rooms.models import Room
 def all_rooms(request):
-    now = datetime.now()
-    hungry = True
+    all_rooms = Room.objects.all()
+
     return render(request,
-                  template_name='all_rooms.html',
+                  template_name='rooms/home.html',
                   context={
-                      'now':now,
-                      'hungry':hungry})
+                      'all_rooms':all_rooms})
