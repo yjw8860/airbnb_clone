@@ -6,12 +6,12 @@
 {% endfor %}
 <h5>
 {% if rooms.has_previous %}
-<a href="?page={{rooms.number|add:-1}}">Previous</a>
+<a href="?page={{rooms.previous_page_number}}">Previous</a>
 {% else %}
 {% endif %} 
 Page : {{rooms.number}} of {{rooms.paginator.num_pages}}
 {% if rooms.has_next %}
-<a href="?page={{rooms.number|add:1}}">Next</a>
+<a href="?page={{rooms.next_page_number}}">Next</a>
 {% else %}
 {% endif %}
 </h5>
