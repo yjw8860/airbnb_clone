@@ -4,12 +4,15 @@
 {% for room in all_rooms %}
 <h1>{{room.name}}</h1>
 {% endfor %}
-<h5>Page : {{page}} of {{page_count}}</h5>
-<div>
-    {% for page in page_count_range %}
-    <a href="?page={{page}}">{{page}}</a>
-    {% endfor %}
-</div>
-
-
+<h5>
+{% if page > 1 %}
+<a href="?page={{page|add:-1}}">Previous</a>
+{% else %}
+{% endif %} 
+Page : {{page}} of {{page_count}}
+{% if page < page_count %}
+<a href="?page={{page|add:1}}">Next</a>
+{% else %}
+{% endif %}
+</h5>
 {% endblock content %}
