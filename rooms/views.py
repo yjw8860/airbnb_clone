@@ -1,8 +1,8 @@
 from django.views.generic import ListView
-from django.urls import reverse
+from django.http import Http404
 from rooms.models import Room
 from django.utils import timezone
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 
 class HomeView(ListView):
 
@@ -26,6 +26,6 @@ def room_detail(request, pk):
         return render(request, 'rooms/detail.html',
                       context={'room': room})
     except Room.DoesNotExist:
-        return redirect(reverse("core:home"))
+        raise Http404()
 
 
