@@ -28,4 +28,7 @@ def room_detail(request, pk):
     except Room.DoesNotExist:
         raise Http404()
 
-
+def search(request):
+    city = request.GET.get('city')
+    city = str.capitalize(city)
+    return render(request, "rooms/search.html", {"city":city})
